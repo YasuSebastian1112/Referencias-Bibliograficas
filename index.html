@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Acervo Bibliográfico · Protocolo de Mantenimiento CECyT 3 (IPN)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --guinda: #6D1A36;
+      --guinda-dark: #4A1126;
+      --guinda-soft: #F4E8EC;
+      --oro: #B8933A;
+      --oro-light: #E8D9A8;
+      --crema: #F8F4EF;
+      --blanco: #FFFFFF;
+      --texto: #231F20;
+      --texto-sec: #5C5356;
+      --borde: #E5DDD5;
+      --sombra: 0 4px 20px rgba(74, 17, 38, 0.06);
+      --sombra-hover: 0 10px 28px rgba(109, 26, 54, 0.13);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--crema);
+      color: var(--texto);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Institutional Top Bar */
+    .inst-bar {
+      background-color: var(--guinda-dark);
+      color: var(--oro-light);
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      font-weight: 600;
+      padding: 0.55rem 1.5rem;
+      text-align: center;
+      border-bottom: 2px solid var(--oro);
+    }
+
+    /* Hero Header */
+    header.hero {
+      background: linear-gradient(135deg, var(--guinda) 0%, var(--guinda-dark) 100%);
+      color: var(--blanco);
+      padding: 3.25rem 1.5rem 3.5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    header.hero::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: radial-gradient(rgba(232, 217, 168, 0.09) 1px, transparent 1px);
+      background-size: 22px 22px;
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 1120px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 1.1rem;
+    }
+
+    .badge {
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(232, 217, 168, 0.35);
+      color: var(--oro-light);
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+    }
+
+    h1 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(1.75rem, 3.2vw, 2.55rem);
+      line-height: 1.22;
+      font-weight: 700;
+      margin-bottom: 0.9rem;
+      max-width: 920px;
+    }
+
+    .subtitle {
+      color: #F2E6EA;
+      font-size: 1.02rem;
+      max-width: 820px;
+      margin-bottom: 1.8rem;
+    }
+
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      background: rgba(0, 0, 0, 0.18);
+      border: 1px solid rgba(232, 217, 168, 0.22);
+      border-radius: 12px;
+      padding: 1.1rem 1.35rem;
+    }
+
+    .meta-item span.label {
+      display: block;
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--oro-light);
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+    }
+
+    .meta-item span.val {
+      font-size: 0.9rem;
+      color: var(--blanco);
+      font-weight: 500;
+    }
+
+    /* Main Container */
+    main {
+      max-width: 1120px;
+      margin: -1.6rem auto 4rem;
+      padding: 0 1.5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    /* Control Panel */
+    .controls-card {
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-radius: 16px;
+      padding: 1.4rem 1.6rem;
+      box-shadow: var(--sombra);
+      margin-bottom: 1.75rem;
+    }
+
+    .search-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.9rem;
+      align-items: center;
+      margin-bottom: 1.15rem;
+    }
+
+    .search-box {
+      flex: 1 1 320px;
+      position: relative;
+    }
+
+    .search-box input {
+      width: 100%;
+      padding: 0.78rem 1rem 0.78rem 2.75rem;
+      border: 1.5px solid var(--borde);
+      border-radius: 10px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--texto);
+      background: var(--crema);
+      transition: all 0.2s ease;
+    }
+
+    .search-box input:focus {
+      outline: none;
+      border-color: var(--guinda);
+      background: var(--blanco);
+      box-shadow: 0 0 0 3px rgba(109, 26, 54, 0.12);
+    }
+
+    .search-icon {
+      position: absolute;
+      left: 0.95rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: var(--guinda);
+      width: 18px;
+      height: 18px;
+    }
+
+    .stats-pill {
+      background: var(--guinda-soft);
+      color: var(--guinda);
+      font-weight: 600;
+      font-size: 0.86rem;
+      padding: 0.65rem 1.1rem;
+      border-radius: 10px;
+      white-space: nowrap;
+    }
+
+    /* Filter Chips */
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .chip {
+      border: 1px solid var(--borde);
+      background: var(--blanco);
+      color: var(--texto-sec);
+      padding: 0.42rem 0.9rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .chip:hover {
+      border-color: var(--guinda);
+      color: var(--guinda);
+    }
+
+    .chip.active {
+      background: var(--guinda);
+      color: var(--blanco);
+      border-color: var(--guinda);
+    }
+
+    /* Alphabet Bar */
+    .alpha-bar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.32rem;
+      padding-top: 0.85rem;
+      border-top: 1px solid var(--borde);
+    }
+
+    .alpha-btn {
+      min-width: 31px;
+      height: 31px;
+      border-radius: 7px;
+      border: 1px solid transparent;
+      background: var(--crema);
+      color: var(--guinda);
+      font-weight: 700;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s ease;
+    }
+
+    .alpha-btn:hover:not(:disabled) {
+      background: var(--guinda);
+      color: var(--blanco);
+    }
+
+    .alpha-btn.active {
+      background: var(--guinda);
+      color: var(--blanco);
+      border-color: var(--guinda-dark);
+    }
+
+    .alpha-btn:disabled {
+      opacity: 0.32;
+      cursor: default;
+    }
+
+    /* Letter Section Divider */
+    .letter-group {
+      margin-bottom: 2rem;
+    }
+
+    .letter-header {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      margin-bottom: 0.9rem;
+    }
+
+    .letter-badge {
+      width: 38px;
+      height: 38px;
+      border-radius: 10px;
+      background: var(--guinda);
+      color: var(--blanco);
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .letter-line {
+      height: 1px;
+      background: var(--borde);
+      flex: 1;
+    }
+
+    /* Reference Cards (APA Hanging Indent) */
+    .ref-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+    }
+
+    .ref-card {
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-left: 4px solid var(--guinda);
+      border-radius: 12px;
+      padding: 1.15rem 1.4rem;
+      box-shadow: var(--sombra);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.65rem;
+    }
+
+    .ref-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--sombra-hover);
+    }
+
+    .ref-top {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .ref-index {
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--guinda);
+      background: var(--guinda-soft);
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+    }
+
+    .ref-cat {
+      font-size: 0.76rem;
+      font-weight: 600;
+      color: var(--texto-sec);
+      background: var(--crema);
+      border: 1px solid var(--borde);
+      padding: 0.2rem 0.65rem;
+      border-radius: 999px;
+    }
+
+    .apa-text {
+      font-size: 0.96rem;
+      color: var(--texto);
+      padding-left: 1.75rem;
+      text-indent: -1.75rem;
+      word-break: break-word;
+    }
+
+    .ref-actions {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.75rem;
+      padding-top: 0.45rem;
+      border-top: 1px dashed var(--borde);
+    }
+
+    .ref-link {
+      color: var(--guinda);
+      font-size: 0.84rem;
+      font-weight: 600;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      word-break: break-all;
+    }
+
+    .ref-link:hover {
+      text-decoration: underline;
+      color: var(--guinda-dark);
+    }
+
+    .no-link {
+      font-size: 0.82rem;
+      color: var(--texto-sec);
+      font-style: italic;
+    }
+
+    .copy-btn {
+      background: var(--crema);
+      border: 1px solid var(--borde);
+      color: var(--texto);
+      font-family: inherit;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 0.35rem 0.8rem;
+      border-radius: 7px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      transition: all 0.15s ease;
+    }
+
+    .copy-btn:hover {
+      background: var(--guinda);
+      color: var(--blanco);
+      border-color: var(--guinda);
+    }
+
+    .empty-state {
+      text-align: center;
+      padding: 3rem 1.5rem;
+      background: var(--blanco);
+      border: 1px solid var(--borde);
+      border-radius: 14px;
+      color: var(--texto-sec);
+    }
+
+    /* Footer */
+    footer {
+      background: var(--guinda-dark);
+      color: #E8DCE0;
+      padding: 2.2rem 1.5rem;
+      text-align: center;
+      font-size: 0.86rem;
+      border-top: 3px solid var(--oro);
+    }
+
+    footer strong {
+      color: var(--oro-light);
+    }
+
+    @media (max-width: 640px) {
+      .apa-text {
+        padding-left: 1.1rem;
+        text-indent: -1.1rem;
+      }
+      .ref-card {
+        padding: 1rem 1.1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="inst-bar">
+    Instituto Politécnico Nacional · CECyT No. 3 “Estanislao Ramírez Ruiz”
+  </div>
+
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="badge-row">
+        <span class="badge">Bibliográfia (APA 7.ª ed.)</span>
+        <span class="badge">Comunicación Científica · Ciclo 2027-1</span>
+        <span class="badge">Grupo 3IM6 · Equipo #4</span>
+      </div>
+      <h1>Referencias Bibliográficas</h1>
+      <p class="subtitle">
+        Evaluación del estado operativo del hardware en los laboratorios de Computación del CECyT 3 durante el ciclo 2027-1 para el diseño de un protocolo de mantenimiento preventivo y correctivo.
+      </p>
+      <div class="meta-grid">
+        <div class="meta-item">
+          <span class="label">Investigadores</span>
+          <span class="val">Alonso Sánchez Sebastián · Bustos Vega Diego Fernando · Romualdo Tlacuahuac Roberto · Silva Reyes Leslie Citlali</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">Asesora</span>
+          <span class="val">Prof. Terán Chávez Barbara Yadira</span>
+        </div>
+        <div class="meta-item">
+          <span class="label">Especialidad Técnica</span>
+          <span class="val">Técnico en Computación · Ecatepec, Edo. de Méx.</span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="controls-card" aria-label="Filtros y búsqueda bibliográfica">
+      <div class="search-row">
+        <div class="search-box">
+          <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input type="text" id="searchInput" placeholder="Buscar por autor, año, palabra clave (ej. S.M.A.R.T., IPN, BSOD, ITIL)..." />
+        </div>
+        <div class="stats-pill" id="countBadge">Mostrando 52 de 52 fuentes</div>
+      </div>
+
+      <div class="filter-row" id="categoryFilters">
+        <button class="chip active" data-cat="ALL">Todas (52)</button>
+        <button class="chip" data-cat="Documentación Técnica y Web">Documentación Técnica y Web</button>
+        <button class="chip" data-cat="Artículos Científicos">Artículos Científicos</button>
+        <button class="chip" data-cat="Libros y Manuales Académicos">Libros y Manuales</button>
+        <button class="chip" data-cat="Normatividad y Reglamentos">Normatividad IPN / NOM / ISO</button>
+        <button class="chip" data-cat="Tesis y Proyectos de Titulación">Tesis y Titulación</button>
+      </div>
+
+      <div class="alpha-bar" id="alphaBar" aria-label="Índice alfabético"></div>
+    </section>
+
+    <section id="bibContainer"></section>
+  </main>
+
+  <footer>
+    <p><strong>Instituto Politécnico Nacional</strong> · Centro de Estudios Científicos y Tecnológicos No. 3 “Estanislao Ramírez Ruiz”</p>
+    <p style="margin-top:0.35rem; opacity:0.88;">Repositorio Digital de Referencias · Equipo #4 (3IM6) · Noviembre 2026</p>
+  </footer>
+
+  <script>
+    const BIB_DATA = [{"id": 1, "orig": 1, "author": "Advanced Micro Devices Technical Documentation Group", "year": "2023", "citation": "Advanced Micro Devices Technical Documentation Group. (2023). Thermal design parameters, operating temperatures, and throttling mechanics for AMD Ryzen desktop processors. AMD Support and Community Hub.", "url": "https://www.amd.com/en/support/kb/technical-docs/processors-thermal-specs", "category": "Documentación Técnica y Web", "letter": "A"}, {"id": 2, "orig": 2, "author": "Alonso-Martínez, R., & Delgado-Paredes, S", "year": "2023", "citation": "Alonso-Martínez, R., & Delgado-Paredes, S. (2023). Auditoría de infraestructura tecnológica y gestión del ciclo de vida del hardware en planteles de educación media superior. Revista Mexicana de Ingeniería y Tecnología Educativa, 8(2), 34–49.", "url": "", "category": "Artículos Científicos", "letter": "A"}, {"id": 3, "orig": 3, "author": "Area-Moreira, M., San Nicolás, M. B., & Sanabria, A. L", "year": "2018", "citation": "Area-Moreira, M., San Nicolás, M. B., & Sanabria, A. L. (2018). Las TIC en las escuelas de Educación Primaria y Secundaria: Visión del profesorado. Revista de Educación a Distancia (RED), 56(6), 1–22.", "url": "", "category": "Artículos Científicos", "letter": "A"}, {"id": 4, "orig": 4, "author": "Ascent Optics Engineering Division", "year": "2025", "citation": "Ascent Optics Engineering Division. (2025, 14 de enero). Prácticas recomendadas para la prevención de descargas electrostáticas (ESD) en talleres de mantenimiento informático y ensamblaje de hardware. Ascent Optics Technical Resource Library.", "url": "https://ascentoptics.com/blog/es/esd-prevention-best-practices-hardware/", "category": "Documentación Técnica y Web", "letter": "A"}, {"id": 5, "orig": 5, "author": "Barrios, A., Gómez, L., & Méndez, R", "year": "2005", "citation": "Barrios, A., Gómez, L., & Méndez, R. (2005). Arquitectura física y funcionamiento de sistemas de almacenamiento magnético digital (SAMD). Editorial Tecnológica.", "url": "", "category": "Libros y Manuales Académicos", "letter": "B"}, {"id": 6, "orig": 6, "author": "Bates, A. W", "year": "2019", "citation": "Bates, A. W. (2019). Teaching in a digital age: Guidelines for designing teaching and learning (2nd ed.). Tony Bates Associates Ltd.", "url": "", "category": "Libros y Manuales Académicos", "letter": "B"}, {"id": 7, "orig": 7, "author": "Centro Nacional de Soporte Técnico", "year": "2021", "citation": "Centro Nacional de Soporte Técnico. (2021). Guía de buenas prácticas en la gestión y mantenimiento de aulas de cómputo educativas. CNST Publicaciones Técnicas.", "url": "https://www.soportecen.org/guias/aulas-computo", "category": "Documentación Técnica y Web", "letter": "C"}, {"id": 8, "orig": 8, "author": "Cevallos-Salazar, J. L., & Castro-Espinoza, R. M", "year": "2022", "citation": "Cevallos-Salazar, J. L., & Castro-Espinoza, R. M. (2022). El mantenimiento preventivo como estrategia para la optimización de los laboratorios de cómputo educativos. Polo del Conocimiento: Revista Científico-Académica Multidisciplinaria, 7(4), 512–528.", "url": "https://dialnet.unirioja.es/servlet/articulo?codigo=8483120", "category": "Artículos Científicos", "letter": "C"}, {"id": 9, "orig": 9, "author": "Cisco Systems", "year": "2022", "citation": "Cisco Systems. (2022). Cisco service ready architecture for schools design guide: Campus infrastructure and network operation. Cisco Press.", "url": "https://www.cisco.com/c/en/us/td/docs/solutions/Enterprise/Education/SchoolsSRA_DG/SchoolsSRA-DG/SchoolsSRA_chap1.html", "category": "Documentación Técnica y Web", "letter": "C"}, {"id": 10, "orig": 10, "author": "Computing Technology Industry Association", "year": "2022", "citation": "Computing Technology Industry Association. (2022). CompTIA A+ Core 1 (220-1101) & Core 2 (220-1102) certification exam objectives and standard troubleshooting methodology. CompTIA Academic Series; Pearson IT Certification.", "url": "https://www.comptia.org/certifications/a", "category": "Libros y Manuales Académicos", "letter": "C"}, {"id": 11, "orig": 11, "author": "Crucial Storage Team", "year": "2024", "citation": "Crucial Storage Team. (2024, 19 de septiembre). ¿Por qué la temperatura afecta al rendimiento y duración de los componentes informáticos? Crucial Insights; Micron Technology.", "url": "https://www.crucial.mx/articles/about-storage/how-temperature-affects-computer-performance", "category": "Documentación Técnica y Web", "letter": "C"}, {"id": 12, "orig": 13, "author": "Dell Technologies Support", "year": "2024", "citation": "Dell Technologies Support. (2024, 18 de noviembre). Cómo ejecutar la prueba de diagnóstico ePSA o PSA y su función en la resolución de problemas. Dell Knowledge Base.", "url": "https://www.dell.com/support/kbdoc/es-es/000181167/", "category": "Documentación Técnica y Web", "letter": "D"}, {"id": 13, "orig": 12, "author": "Dell Technologies", "year": "2023", "citation": "Dell Technologies. (2023). Manual de diagnóstico de hardware, códigos de error de diagnóstico e indicadores luminosos para equipos de escritorio corporativos OptiPlex e Inspiron. Dell Technologies Service Operations.", "url": "https://www.dell.com/support/kbdoc/es-mx/000123890/", "category": "Documentación Técnica y Web", "letter": "D"}, {"id": 14, "orig": 14, "author": "Dirección General de Normas", "year": "2022", "citation": "Dirección General de Normas. (2022). Norma Oficial Mexicana NOM-001-SEDE-2012, Instalaciones Eléctricas (utilización) (Revisión técnica de instalaciones escolares y centros de cómputo). Secretaría de Energía; Diario Oficial de la Federación.", "url": "https://www.dof.gob.mx/nota_detalle.php?codigo=5280607&fecha=29/11/2012", "category": "Normatividad y Reglamentos", "letter": "D"}, {"id": 15, "orig": 15, "author": "Fluke Corporation", "year": "2022", "citation": "Fluke Corporation. (2022). Guía de medición de calidad eléctrica, armónicos y tolerancias de tensión en fuentes conmutadas de centros de cómputo. Fluke Technical Application Notes.", "url": "", "category": "Documentación Técnica y Web", "letter": "F"}, {"id": 16, "orig": 16, "author": "Gayubas, A", "year": "2025", "citation": "Gayubas, A. (2025, 11 de septiembre). Metodología de la investigación: Qué es, tipos, técnicas y etapas del proceso científico. Enciclopedia Humanidades.", "url": "https://humanidades.com/metodologia-de-la-investigacion/", "category": "Documentación Técnica y Web", "letter": "G"}, {"id": 17, "orig": 17, "author": "Gualotuña-Pallo, M. M", "year": "2021", "citation": "Gualotuña-Pallo, M. M. (2021). Propuesta de un plan de mantenimiento preventivo y correctivo para los equipos de cómputo de los laboratorios informáticos [Tesis de Licenciatura, Universidad de Iberoamérica]. Repositorio Digital UNIBE.", "url": "http://repositorio.unibe.edu.ec/handle/123456789/214", "category": "Tesis y Proyectos de Titulación", "letter": "G"}, {"id": 18, "orig": 18, "author": "Hernández-Sampieri, R., & Mendoza, C", "year": "2022", "citation": "Hernández-Sampieri, R., & Mendoza, C. (2022). Metodología de la investigación: Las rutas cuantitativa, cualitativa y mixta. McGraw-Hill Interamericana; RUDICS UNAM.", "url": "https://virtual.cuautitlan.unam.mx/rudics/?p=2612", "category": "Libros y Manuales Académicos", "letter": "H"}, {"id": 19, "orig": 19, "author": "HP Tech Takes", "year": "2024", "citation": "HP Tech Takes. (2024, 12 de julio). Evita dolores de cabeza: Guía integral de mantenimiento preventivo para computadoras personales de escritorio. Hewlett-Packard Development Company.", "url": "https://www.hp.com/mx-es/tech-takes/desktops/mantenimiento/guia-mantenimiento-preventivo-pc.html", "category": "Documentación Técnica y Web", "letter": "H"}, {"id": 20, "orig": 20, "author": "Instituto Politécnico Nacional", "year": "2021", "citation": "Instituto Politécnico Nacional. (2021a). Reglamento General de Estudios del Instituto Politécnico Nacional (Artículo 93: De la validez y acreditación de las prácticas escolares). Dirección de Administración Escolar; CIDETEC-IPN.", "url": "https://www.cidetec.ipn.mx/assets/files/cidetec/docs/MTC/General/reglamento-general.pdf", "category": "Normatividad y Reglamentos", "letter": "I"}, {"id": 21, "orig": 21, "author": "Instituto Politécnico Nacional", "year": "2021", "citation": "Instituto Politécnico Nacional. (2021b). Reglamento General de Estudios del Instituto Politécnico Nacional (Artículo 94: De la conformación curricular de las prácticas técnicas). Dirección de Administración Escolar; CIDETEC-IPN.", "url": "https://www.cidetec.ipn.mx/assets/files/cidetec/docs/MTC/General/reglamento-general.pdf", "category": "Normatividad y Reglamentos", "letter": "I"}, {"id": 22, "orig": 22, "author": "Instituto Politécnico Nacional", "year": "2021", "citation": "Instituto Politécnico Nacional. (2021c). Reglamento Interno del Instituto Politécnico Nacional (Artículo 107, Fracción X: De los derechos y obligaciones de los alumnos en la conservación de bienes). Secretaría de Servicios Educativos; IPN.", "url": "https://www.ipn.mx/normatividad/reglamento-interno.html", "category": "Normatividad y Reglamentos", "letter": "I"}, {"id": 23, "orig": 23, "author": "Intel Corporation Customer Support", "year": "2024", "citation": "Intel Corporation Customer Support. (2024, 8 de mayo). Cómo limpiar y aplicar pasta térmica en procesadores para computadoras de escritorio. Intel Knowledge Base.", "url": "https://www.intel.la/content/www/xl/es/support/articles/000005576/processors.html", "category": "Documentación Técnica y Web", "letter": "I"}, {"id": 24, "orig": 24, "author": "International Organization for Standardization", "year": "2018", "citation": "International Organization for Standardization. (2018). ISO/IEC 20000-1:2018 Information technology — Service management — Part 1: Service management system requirements. ISO.", "url": "", "category": "Normatividad y Reglamentos", "letter": "I"}, {"id": 25, "orig": 25, "author": "Jarrín-Vinueza, G. A., & Benavides-López, M. E", "year": "2021", "citation": "Jarrín-Vinueza, G. A., & Benavides-López, M. E. (2021). Diseño e implementación de un sistema de gestión de procedimientos técnicos y seguridad para salas de cómputo académicas. Revista Tecnológica UTN, 14(1), 45–59.", "url": "http://repositorio.utn.edu.ec/handle/123456789/4128", "category": "Artículos Científicos", "letter": "J"}, {"id": 26, "orig": 26, "author": "Kingston Technology Company", "year": "2024", "citation": "Kingston Technology Company. (2024, 5 de enero). Comprensión de las métricas TBW y DWPD en la evaluación del ciclo de vida útil de las unidades de estado sólido (SSD). Kingston Learning Center.", "url": "https://www.kingston.com/es/blog/pc-performance/understanding-tbw-dwpd-ssd-lifespan", "category": "Documentación Técnica y Web", "letter": "K"}, {"id": 27, "orig": 27, "author": "Lenovo Support and Solutions Group", "year": "2023", "citation": "Lenovo Support and Solutions Group. (2023, 14 de marzo). Secuencias de señales acústicas del POST, códigos sonoros de error y diagnóstico de arranque para estaciones de trabajo ThinkCentre. Lenovo Technical Support Knowledge Base.", "url": "https://support.lenovo.com/es/es/solutions/ht505324", "category": "Documentación Técnica y Web", "letter": "L"}, {"id": 28, "orig": 28, "author": "Leo, H", "year": "2022", "citation": "Leo, H. (2022). Manual de mantenimiento preventivo y correctivo de hardware y software bajo metodologías de diagramación de fallas [Manual Técnico Académico]. Colegio de Bachilleres (COBAQ Plantel 10); StuDocu Academic Network.", "url": "https://www.studocu.com/es-mx/document/96321477", "category": "Documentación Técnica y Web", "letter": "L"}, {"id": 29, "orig": 29, "author": "Maldonado Valdez, E", "year": "2025", "citation": "Maldonado Valdez, E. (2025). Curso en línea de mantenimiento preventivo y correctivo del equipo de cómputo para los alumnos del Centro de Estudios de Educación Media Superior a Distancia, Casa Blanca [Tesis de Maestría en Tecnología Informática Educativa, Universidad Autónoma de Zacatecas]. Repositorio Institucional Caxcán.", "url": "http://ricaxcan.uaz.edu.mx/jspui/handle/20.500.11845/4107", "category": "Tesis y Proyectos de Titulación", "letter": "M"}, {"id": 30, "orig": 30, "author": "Microsoft Learn", "year": "2022", "citation": "Microsoft Learn. (2022, 14 de noviembre). Solución de problemas de reinicios inesperados y errores de código de detención en sistemas operativos Windows. Microsoft Support Hub.", "url": "https://support.microsoft.com/es-es/windows/experience/performance-optimization/troubleshooting-windows-unexpected-restarts-and-stop-code-errors", "category": "Documentación Técnica y Web", "letter": "M"}, {"id": 31, "orig": 31, "author": "Microsoft Learn", "year": "2025", "citation": "Microsoft Learn. (2025, 10 de enero). Deployment Image Servicing and Management (DISM) best practices and image maintenance procedures. Microsoft Windows Hardware Developer Documentation.", "url": "https://learn.microsoft.com/en-us/windows-hardware/manufacture/desktop/deployment-image-servicing-and-management--dism--best-practices", "category": "Documentación Técnica y Web", "letter": "M"}, {"id": 32, "orig": 32, "author": "Microsoft Support and Operating Systems Diagnostics Group", "year": "2024", "citation": "Microsoft Support and Operating Systems Diagnostics Group. (2024). Solución avanzada de problemas de detención de Windows: Diagnóstico de comprobación de errores Bugcheck y pantallas azules de detención (BSOD). Microsoft Learn Platform.", "url": "https://learn.microsoft.com/es-es/troubleshoot/windows-client/performance/stop-error-or-blue-screen-error-issue", "category": "Documentación Técnica y Web", "letter": "M"}, {"id": 33, "orig": 33, "author": "Ministerio de Educación", "year": "2021", "citation": "Ministerio de Educación. (2021). Guía práctica de soporte técnico y mantenimiento de infraestructura tecnológica escolar. Dirección General de Tecnología de la Información y Comunicación (DGTIC).", "url": "https://ministeriodeeducacion.gob.do/servicios/dgtic/manuales-soporte", "category": "Documentación Técnica y Web", "letter": "M"}, {"id": 34, "orig": 34, "author": "Morales, O", "year": "2025", "citation": "Morales, O. (2025, 2 de febrero). Comprobación e integridad estructural del sistema de archivos y del almacén de componentes mediante SFC y DISM en Windows 11. ADSLZone Software.", "url": "https://www.adslzone.net/reportajes/software/reparar-windows-sfc-dism/", "category": "Documentación Técnica y Web", "letter": "M"}, {"id": 35, "orig": 35, "author": "Mueller, S", "year": "2021", "citation": "Mueller, S. (2021). Upgrading and repairing PCs (23.ª ed. revisada). Que Publishing; Pearson Education.", "url": "", "category": "Libros y Manuales Académicos", "letter": "M"}, {"id": 36, "orig": 36, "author": "Paredes-Garcés, C. M., & Loza-López, E. F", "year": "2023", "citation": "Paredes-Garcés, C. M., & Loza-López, E. F. (2023). Aplicación de buenas prácticas de ITIL para la gestión de incidentes y requerimientos en unidades de soporte técnico educativo. Revista Científica UISRAEL, 10(2), 77–94.", "url": "https://doi.org/10.35290/rcui.v10n2.2023.821", "category": "Artículos Científicos", "letter": "P"}, {"id": 37, "orig": 37, "author": "PassMark Software Development Team", "year": "2024", "citation": "PassMark Software Development Team. (2024). MemTest86 technical reference guide: Standalone memory diagnostic software and RAM fault classification. PassMark Publications.", "url": "https://www.memtest86.com/technical.htm", "category": "Documentación Técnica y Web", "letter": "P"}, {"id": 38, "orig": 38, "author": "Pinheiro, E., Weber, W. D., & Barroso, L. A", "year": "2007", "citation": "Pinheiro, E., Weber, W. D., & Barroso, L. A. (2007). Failure trends in a large disk drive population. Proceedings of the 5th USENIX Conference on File and Storage Technologies (FAST '07), 17–28.", "url": "", "category": "Artículos Científicos", "letter": "P"}, {"id": 39, "orig": 39, "author": "Ramírez, M", "year": "2025", "citation": "Ramírez, M. (2025, 14 de marzo). Guía completa de CrystalDiskMark y lectura de telemetría S.M.A.R.T.: Cómo diagnosticar la degradación de rendimiento en discos SSD y HDD. Profesional Review Hardware.", "url": "https://www.profesionalreview.com/tutoriales/crystaldiskmark-guia-rendimiento-almacenamiento/", "category": "Documentación Técnica y Web", "letter": "R"}, {"id": 40, "orig": 40, "author": "Reinoso Molina, W. A", "year": "2025", "citation": "Reinoso Molina, W. A. (2025). La falta de equipo tecnológico y su influencia en el rendimiento académico de los estudiantes. Revista Científica Arbitrada Multidisciplinaria de Ciencias de la Educación (LATAM), 6(1), 180–195.", "url": "https://doi.org/10.56712/latam.v6i1.3340", "category": "Artículos Científicos", "letter": "R"}, {"id": 41, "orig": 41, "author": "Rodríguez-Morales, J. F., & Valdivia-Guzmán, M. T", "year": "2022", "citation": "Rodríguez-Morales, J. F., & Valdivia-Guzmán, M. T. (2022). El aprendizaje-servicio como estrategia formativa en el mantenimiento de infraestructura tecnológica escolar. Revista Iberoamericana de Educación Técnica, 5(2), 61–78.", "url": "https://doi.org/10.37558/riet.v5i2.112", "category": "Artículos Científicos", "letter": "R"}, {"id": 42, "orig": 42, "author": "Sánchez-Hernández, P. A., & Castillo-Montes, J. R", "year": "2024", "citation": "Sánchez-Hernández, P. A., & Castillo-Montes, J. R. (2024). Impacto del tiempo de inactividad de estaciones de trabajo informáticas en la deserción escolar de bachilleratos tecnológicos. Revista de Tecnología Educativa y Sociedad, 12(3), 114–130.", "url": "https://doi.org/10.29393/tes12-7iths20007", "category": "Artículos Científicos", "letter": "S"}, {"id": 43, "orig": 43, "author": "Seagate Technology LLC", "year": "2014", "citation": "Seagate Technology LLC. (2014). Hard disk drive reliability and MTBF / AFR: Operating temperature, power supply tolerances, and duty cycle specifications. Seagate Storage Engineering Technical Paper.", "url": "", "category": "Documentación Técnica y Web", "letter": "S"}, {"id": 44, "orig": 44, "author": "Silberschatz, A., Galvin, P. B., & Gagne, G", "year": "2018", "citation": "Silberschatz, A., Galvin, P. B., & Gagne, G. (2018). Operating system concepts (10th ed.). John Wiley & Sons.", "url": "", "category": "Libros y Manuales Académicos", "letter": "S"}, {"id": 45, "orig": 45, "author": "Tanenbaum, A. S., & Bos, H", "year": "2015", "citation": "Tanenbaum, A. S., & Bos, H. (2015). Modern operating systems (4th ed.). Pearson Education.", "url": "", "category": "Libros y Manuales Académicos", "letter": "T"}, {"id": 46, "orig": 46, "author": "Toaza-Tito, J. E", "year": "2021", "citation": "Toaza-Tito, J. E. (2021). Plan de mantenimiento preventivo y correctivo para los laboratorios de cómputo de la Facultad de Ingeniería en Sistemas [Proyecto Técnico de Titulación, Universidad Técnica de Ambato]. Repositorio Institucional UTA.", "url": "http://repositorio.uta.edu.ec/handle/123456789/22340", "category": "Tesis y Proyectos de Titulación", "letter": "T"}, {"id": 47, "orig": 47, "author": "Tojeiro-Rivero, D", "year": "2025", "citation": "Tojeiro-Rivero, D. (2025, 8 de enero). Obsolescencia tecnológica: Definición, tipologías e impacto en la infraestructura económica e institucional. Do Better by ESADE.", "url": "https://dobetter.esade.edu/es/obsolescencia-tecnologica-definicion-tipos-e-impacto-economico", "category": "Documentación Técnica y Web", "letter": "T"}, {"id": 48, "orig": 48, "author": "Topping, K. J", "year": "2017", "citation": "Topping, K. J. (2017). Peer learning and peer tutoring: Definitions and distinctions. En Using peer tutoring to improve reading skills (pp. 1–18). Routledge.", "url": "", "category": "Libros y Manuales Académicos", "letter": "T"}, {"id": 49, "orig": 49, "author": "Torrente, J., & Fernández, L", "year": "2023", "citation": "Torrente, J., & Fernández, L. (2023, 10 de junio). La degradación del rendimiento en unidades SSD: El papel del comando TRIM, recolección de basura y nivelación de desgaste. RedesZone; Grupo ADSLZone.", "url": "https://www.redeszone.net/tutoriales/mantenimiento/ssd-rendimiento-trim-garbage-collection/", "category": "Documentación Técnica y Web", "letter": "T"}, {"id": 50, "orig": 50, "author": "Universidad Tecnológica de la Mixteca", "year": "2021", "citation": "Universidad Tecnológica de la Mixteca. (2021). Manual de procedimientos técnicos para el mantenimiento preventivo y correctivo de equipo de cómputo universitario. Órgano de Soporte Técnico y Tecnologías de la Información (UTM).", "url": "http://www.utm.mx/soporte/manual_mantenimiento_computo.pdf", "category": "Documentación Técnica y Web", "letter": "U"}, {"id": 51, "orig": 51, "author": "Western Digital Corporation", "year": "2007", "citation": "Western Digital Corporation. (2007). Hard drive vibration and shock sensitivity in multi-bay desktop environments: Acoustic and mechanical resonance white paper. Western Digital Technical Library.", "url": "", "category": "Documentación Técnica y Web", "letter": "W"}, {"id": 52, "orig": 52, "author": "Western Digital Technologies", "year": "2023", "citation": "Western Digital Technologies. (2023, 11 de octubre). Interpreting S.M.A.R.T. health attributes, error tolerance thresholds, and drive failure symptoms in desktop storage drives. WD Customer Knowledge Base.", "url": "https://support-en.wd.com/app/answers/detail/a_id/4211", "category": "Documentación Técnica y Web", "letter": "W"}];
+
+    let activeCategory = 'ALL';
+    let activeLetter = 'ALL';
+    let searchQuery = '';
+
+    const bibContainer = document.getElementById('bibContainer');
+    const searchInput = document.getElementById('searchInput');
+    const countBadge = document.getElementById('countBadge');
+    const alphaBar = document.getElementById('alphaBar');
+    const categoryFilters = document.getElementById('categoryFilters');
+
+    function initAlphaBar() {
+      const letters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+      const available = new Set(BIB_DATA.map(d => d.letter));
+
+      const allBtn = document.createElement('button');
+      allBtn.className = 'alpha-btn active';
+      allBtn.textContent = 'Todas';
+      allBtn.style.padding = '0 0.65rem';
+      allBtn.dataset.letter = 'ALL';
+      alphaBar.appendChild(allBtn);
+
+      letters.forEach(l => {
+        const btn = document.createElement('button');
+        btn.className = 'alpha-btn';
+        btn.textContent = l;
+        btn.dataset.letter = l;
+        if (!available.has(l)) btn.disabled = true;
+        alphaBar.appendChild(btn);
+      });
+
+      alphaBar.addEventListener('click', e => {
+        const btn = e.target.closest('.alpha-btn');
+        if (!btn || btn.disabled) return;
+        activeLetter = btn.dataset.letter;
+        document.querySelectorAll('.alpha-btn').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        render();
+      });
+    }
+
+    categoryFilters.addEventListener('click', e => {
+      const chip = e.target.closest('.chip');
+      if (!chip) return;
+      activeCategory = chip.dataset.cat;
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      render();
+    });
+
+    searchInput.addEventListener('input', e => {
+      searchQuery = e.target.value.trim().toLowerCase();
+      render();
+    });
+
+    function copyCitation(text, btn) {
+      navigator.clipboard.writeText(text).then(() => {
+        const orig = btn.innerHTML;
+        btn.innerHTML = '✓ Copiada';
+        btn.style.background = '#6D1A36';
+        btn.style.color = '#FFFFFF';
+        setTimeout(() => {
+          btn.innerHTML = orig;
+          btn.style.background = '';
+          btn.style.color = '';
+        }, 1600);
+      });
+    }
+
+    function render() {
+      const filtered = BIB_DATA.filter(item => {
+        const matchCat = activeCategory === 'ALL' || item.category === activeCategory;
+        const matchLetter = activeLetter === 'ALL' || item.letter === activeLetter;
+        const matchSearch = !searchQuery ||
+          item.citation.toLowerCase().includes(searchQuery) ||
+          item.category.toLowerCase().includes(searchQuery) ||
+          (item.url && item.url.toLowerCase().includes(searchQuery));
+        return matchCat && matchLetter && matchSearch;
+      });
+
+      countBadge.textContent = `Mostrando ${filtered.length} de ${BIB_DATA.length} fuentes`;
+
+      if (filtered.length === 0) {
+        bibContainer.innerHTML = `
+          <div class="empty-state">
+            <h3 style="color:var(--guinda); margin-bottom:0.4rem;">Sin coincidencias</h3>
+            <p>No se encontraron referencias que coincidan con los filtros aplicados.</p>
+          </div>
+        `;
+        return;
+      }
+
+      // Group alphabetically by first letter
+      const groups = {};
+      filtered.forEach(item => {
+        if (!groups[item.letter]) groups[item.letter] = [];
+        groups[item.letter].push(item);
+      });
+
+      const sortedLetters = Object.keys(groups).sort();
+      bibContainer.innerHTML = '';
+
+      sortedLetters.forEach(letter => {
+        const groupDiv = document.createElement('div');
+        groupDiv.className = 'letter-group';
+
+        const header = document.createElement('div');
+        header.className = 'letter-header';
+        header.innerHTML = `
+          <div class="letter-badge">${letter}</div>
+          <div class="letter-line"></div>
+        `;
+        groupDiv.appendChild(header);
+
+        const listDiv = document.createElement('div');
+        listDiv.className = 'ref-list';
+
+        groups[letter].forEach(item => {
+          const card = document.createElement('article');
+          card.className = 'ref-card';
+
+          const fullApa = item.url ? `${item.citation} ${item.url}` : item.citation;
+
+          card.innerHTML = `
+            <div class="ref-top">
+              <span class="ref-index">Referencia #${item.id}</span>
+              <span class="ref-cat">${item.category}</span>
+            </div>
+            <p class="apa-text">${item.citation}</p>
+            <div class="ref-actions">
+              ${item.url
+                ? `<a class="ref-link" href="${item.url}" target="_blank" rel="noopener noreferrer">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path>
+                      <polyline points="15 3 21 3 21 9"></polyline>
+                      <line x1="10" y1="14" x2="21" y2="3"></line>
+                    </svg>
+                    Consultar fuente en línea
+                  </a>`
+                : `<span class="no-link">Fuente impresa / documento institucional</span>`
+              }
+              <button class="copy-btn" type="button">Copiar cita APA</button>
+            </div>
+          `;
+
+          const copyBtn = card.querySelector('.copy-btn');
+          copyBtn.addEventListener('click', () => copyCitation(fullApa, copyBtn));
+
+          listDiv.appendChild(card);
+        });
+
+        groupDiv.appendChild(listDiv);
+        bibContainer.appendChild(groupDiv);
+      });
+    }
+
+    initAlphaBar();
+    render();
+  </script>
+</body>
+</html>
